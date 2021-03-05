@@ -118,10 +118,11 @@ observações dos apartamentos segundo os preços por metro quadrado.
     5 dados[order(dados$pm2), ]
 
 <p>
-Os próximos dois verbos são *group\_by* e *summarise* que, em geral, são
-utilizados em conjunto com outros verbos. Deixaremos, assim, para ver
-exemplos com essas estruturas logo a seguir, quando conectarmos todos os
-verbos do dplyr com o operador %&gt;%.
+Os próximos dois verbos são <strong>group\_by</strong> e
+<strong>summarise</strong> que, em geral, são utilizados em conjunto com
+outros verbos. Deixaremos, assim, para ver exemplos com essas estruturas
+logo a seguir, quando conectarmos todos os verbos do dplyr com o
+operador %&gt;%.
 </p>
 <h5>
 § group\_by:
@@ -159,8 +160,8 @@ código de manipulação dos dados da mesma forma que você pensa nas
 atividades.
 </p>
 <p>
-Pense numa receita que tenha as seguintes instruções: *junte os
-igredientes, misture e leve ao forno*. Na forma usual do R, tais
+Pense numa receita que tenha as seguintes instruções: <strong>junte os
+igredientes, misture e leve ao forno</strong>. Na forma usual do R, tais
 instruções provavelmente teriam a seguinte forma:
 </p>
 
@@ -180,21 +181,20 @@ assim:
 intuitivo, não?
 </p>
 <p>
-Vejamos exemplos de manipulações de dados com o dplyr usando nossa base
-de dados de imóveis.
+Vejamos exemplos de manipulações de dados com o dplyr usando uma base de
+dados de imóveis.
 </p>
 <h3 id="filtro">
 Filtrando, selecionando e criando colunas
 </h3>
 <p>
-*Instrução:* Filtre apenas os dados coletados de apartamento, selecione
-as colunas bairro e preco, crie uma coluna pm2 = preco/m2, ordene os
-dados de forma decrescente em pm2 e mostre apenas as 6 primeiras linhas
-(head).
+<strong>Instrução:</strong> Filtre apenas os dados coletados de
+apartamento, selecione as colunas bairro e preco, crie uma coluna pm2 =
+preco/m2, ordene os dados de forma decrescente em pm2 e mostre apenas as
+6 primeiras linhas (head).
 </p>
-<p>
-*Código:*
-</p>
+
+<strong>Código:</strong>
 
     1- dados %>% filter(imovel=="apartamento") %>% 
     2- select(bairro, preco, m2) %>% mutate(pm2 = preco/m2) %>%
@@ -215,13 +215,14 @@ dados de forma decrescente em pm2 e mostre apenas as 6 primeiras linhas
 Agrupando e sumarizando
 </h3>
 <p>
-*Instrução:* Filtre apenas os dados de venda de apartamento. Agrupe os
-dados por bairro. Calcule as medianas do preco, m2 e pm2, bem como o
-número de observações. Filtre apenas os grupos com mais de 30
-observações. Ordene de forma decrescente com base na mediana de pm2.
+<strong>Instrução:</strong> Filtre apenas os dados de venda de
+apartamento. Agrupe os dados por bairro. Calcule as medianas do preco,
+m2 e pm2, bem como o número de observações. Filtre apenas os grupos com
+mais de 30 observações. Ordene de forma decrescente com base na mediana
+de pm2.
 </p>
 
-*Código:*
+<strong>Código:</strong>
 
     1-  dados %>%
     2-  filter(imovel=="apartamento", tipo=="venda") %>%
