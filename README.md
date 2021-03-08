@@ -37,13 +37,17 @@ Se você ainda não tem o dplyr instalado na sua máquina, rode o seguinte
 comando.
 </p>
 
-    1 install.packages("dplyr", repos = "http://cran.r-project.org")
+``` r
+install.packages("dplyr", repos = "http://cran.r-project.org")
+```
 
 <p>
 Depois carregue o pacote:
 </p>
 
-    1 library(dplyr)
+``` r
+ library(dplyr)
+```
 
 <h1 id="funcoes">
 Funções principais
@@ -196,9 +200,11 @@ preco/m2, ordene os dados de forma decrescente em pm2 e mostre apenas as
 
 <strong>Código:</strong>
 
-    1- dados %>% filter(imovel=="apartamento") %>% 
-    2- select(bairro, preco, m2) %>% mutate(pm2 = preco/m2) %>%
-    3- arrange(desc(pm2)) %>% head
+``` r
+1- dados %>% filter(imovel=="apartamento") %>% 
+2- select(bairro, preco, m2) %>% mutate(pm2 = preco/m2) %>%
+3- arrange(desc(pm2)) %>% head
+```
 
     1-  ## Source: local data frame [6 x 4]
     2-  ##
@@ -224,15 +230,17 @@ de pm2.
 
 <strong>Código:</strong>
 
-    1-  dados %>%
-    2-  filter(imovel=="apartamento", tipo=="venda") %>%
-    3-  group_by(bairro) %>%
-    4-  summarise(Mediana_Preco = median(preco),
-    5-          Mediana_M2 = median(m2),
-    6-          Mediana_pm2 = median(pm2),
-    7-          Obs = length(pm2)) %>%
-    8-  filter(Obs > 30) %>%
-    9-  arrange(desc(Mediana_pm2))
+``` r
+1-  dados %>%
+2-  filter(imovel=="apartamento", tipo=="venda") %>%
+3-  group_by(bairro) %>%
+4-  summarise(Mediana_Preco = median(preco),
+5-          Mediana_M2 = median(m2),
+6-          Mediana_pm2 = median(pm2),
+7-          Obs = length(pm2)) %>%
+8-  filter(Obs > 30) %>%
+9-  arrange(desc(Mediana_pm2))
+```
 
 
     1-  ## Source: local data frame [6 x 5]
@@ -245,3 +253,42 @@ de pm2.
     8-  ## 4  Asa Norte        780000    94.00  9000.000   40023
     9-  ## 5 Lago Norte        470000    57.55  8329.250    5938
     10- ## 6   Lago Sul        488307    88.55   5199.120    477
+
+``` r
+ library(xlsx) #UTILIZADA PARA LER ARQUIVOS XLSX DIRETAMENTE
+```
+
+    ## Warning: package 'xlsx' was built under R version 4.0.4
+
+``` r
+ library(dplyr)
+```
+
+    ## 
+    ## Attaching package: 'dplyr'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     filter, lag
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     intersect, setdiff, setequal, union
+
+``` r
+ dados = read.xlsx(file='Turma.xlsx', sheetIndex = 1)
+ dados %>%
+   group_by(Media,Nota1,Nota2, Aluno) %>% #AGRUPANDO DADOS ESPECIFICOS
+   filter(Media>="7") %>% #ORGANIZANDO AS MEDIAS MAIORES OU IGUAIS A 7 EM ORDEM CRESCENTE
+  summarise()
+```
+
+    ## `summarise()` has grouped output by 'Media', 'Nota1', 'Nota2'. You can override using the `.groups` argument.
+
+    ## # A tibble: 3 x 4
+    ## # Groups:   Media, Nota1, Nota2 [3]
+    ##   Media Nota1 Nota2 Aluno      
+    ##   <dbl> <dbl> <dbl> <chr>      
+    ## 1   7      10     4 Maria Rita 
+    ## 2   7.5     7     8 Joao Pedro 
+    ## 3   9       8    10 Maros Paulo

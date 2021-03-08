@@ -36,12 +36,13 @@ Sumário
  
 Se você ainda não tem o dplyr instalado na sua máquina, rode o seguinte comando.</p>
 
-```
-1 install.packages("dplyr", repos = "http://cran.r-project.org")
+```{r, eval=FALSE}
+install.packages("dplyr", repos = "http://cran.r-project.org")
 ```
 <p>Depois carregue o pacote:</p>
-```
-1 library(dplyr)
+
+```{r, eval=FALSE}
+ library(dplyr)
 ```
 
  
@@ -123,7 +124,7 @@ Se você ainda não tem o dplyr instalado na sua máquina, rode o seguinte coman
 
 <strong>Código:</strong>
 
-```
+```{r, eval=FALSE}
 1- dados %>% filter(imovel=="apartamento") %>% 
 2- select(bairro, preco, m2) %>% mutate(pm2 = preco/m2) %>%
 3- arrange(desc(pm2)) %>% head
@@ -147,7 +148,7 @@ Se você ainda não tem o dplyr instalado na sua máquina, rode o seguinte coman
 
 <strong>Código:</strong>
 
-```
+```{r, eval=FALSE}
 1-  dados %>%
 2-  filter(imovel=="apartamento", tipo=="venda") %>%
 3-  group_by(bairro) %>%
@@ -171,5 +172,14 @@ Se você ainda não tem o dplyr instalado na sua máquina, rode o seguinte coman
 8-  ## 4  Asa Norte        780000  	 94.00	9000.000   40023
 9-  ## 5 Lago Norte        470000  	 57.55	8329.250    5938
 10- ## 6   Lago Sul        488307  	 88.55   5199.120    477
+```
 
+```{r,eval=TRUE}
+ library(xlsx) #UTILIZADA PARA LER ARQUIVOS XLSX DIRETAMENTE
+ library(dplyr)
+ dados = read.xlsx(file='Turma.xlsx', sheetIndex = 1)
+ dados %>%
+   group_by(Media,Nota1,Nota2, Aluno) %>% #AGRUPANDO DADOS ESPECIFICOS
+   filter(Media>="7") %>% #ORGANIZANDO AS MEDIAS MAIORES OU IGUAIS A 7 EM ORDEM CRESCENTE
+  summarise()
 ```
