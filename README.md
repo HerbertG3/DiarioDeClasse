@@ -5,6 +5,8 @@ Herbert Santos e Marilia Santiago
 
 ## Tutorial DPLYR
 
+![Dplyr](README_files/figure-gfm/dplyr.png)
+
 # Sumário
 
 <!--ts-->
@@ -19,7 +21,8 @@ Herbert Santos e Marilia Santiago
     -   [Arrange](#arrange)
 -   [Conectando tudo](#conectando)
 -   [Filtrando, Selecionando e criando colunas](#filtro)
--   [Agrupando e sumarizando](#agrupando) <!--te-->
+-   [Agrupando e sumarizando](#agrupando)
+-   [Exemplo com planilha Excel](#exemplo) <!--te-->
 
 <h1 id="pacote">
 O pacote dplyr
@@ -254,6 +257,10 @@ de pm2.
     9-  ## 5 Lago Norte        470000    57.55  8329.250    5938
     10- ## 6   Lago Sul        488307    88.55   5199.120    477
 
+<h3 id="exemplo">
+Exemplo utilizando planilha do Excel
+</h3>
+
 ``` r
  library(xlsx) #UTILIZADA PARA LER ARQUIVOS XLSX DIRETAMENTE
 ```
@@ -276,10 +283,14 @@ de pm2.
     ##     intersect, setdiff, setequal, union
 
 ``` r
+## Indicando o arquivo xlsx que será carregado na variável dados
+
  dados = read.xlsx(file='Turma.xlsx', sheetIndex = 1)
  dados %>%
-   group_by(Media,Nota1,Nota2, Aluno) %>% #AGRUPANDO DADOS ESPECIFICOS
-   filter(Media>="7") %>% #ORGANIZANDO AS MEDIAS MAIORES OU IGUAIS A 7 EM ORDEM CRESCENTE
+    # AGRUPANDO DADOS ESPECIFICOS
+   group_by(Media,Nota1,Nota2, Aluno) %>% 
+   # ORGANIZANDO AS MEDIAS MAIORES OU IGUAIS A 7 EM ORDEM CRESCENTE
+    filter(Media>="7") %>% 
   summarise()
 ```
 
@@ -292,3 +303,8 @@ de pm2.
     ## 1   7      10     4 Maria Rita 
     ## 2   7.5     7     8 Joao Pedro 
     ## 3   9       8    10 Maros Paulo
+
+Você pode utilizar o pacote Dplyr todas as vezes que desejar trabalhar
+com a organização dos dados de uma tabela. O Dplyr possibilita um
+trabalho de forma mais intuitiva para que haja uma melhor compreensão
+dos dados contidos em uma tabela.

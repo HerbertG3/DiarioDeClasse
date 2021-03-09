@@ -14,6 +14,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Tutorial DPLYR
 
+![Dplyr](README_files/figure-gfm/dplyr.png)
+
 Sumário
 =================
 <!--ts-->
@@ -28,6 +30,7 @@ Sumário
    * [Conectando tudo](#conectando)
    * [Filtrando, Selecionando e criando colunas](#filtro)
    * [Agrupando e sumarizando](#agrupando)
+   * [Exemplo com planilha Excel](#exemplo)
 <!--te-->
 
  
@@ -173,13 +176,20 @@ install.packages("dplyr", repos = "http://cran.r-project.org")
 9-  ## 5 Lago Norte        470000  	 57.55	8329.250    5938
 10- ## 6   Lago Sul        488307  	 88.55   5199.120    477
 ```
+<h3 id='exemplo'>Exemplo utilizando planilha do Excel</h3>
 
 ```{r,eval=TRUE}
  library(xlsx) #UTILIZADA PARA LER ARQUIVOS XLSX DIRETAMENTE
  library(dplyr)
+
+## Indicando o arquivo xlsx que será carregado na variável dados
+
  dados = read.xlsx(file='Turma.xlsx', sheetIndex = 1)
  dados %>%
-   group_by(Media,Nota1,Nota2, Aluno) %>% #AGRUPANDO DADOS ESPECIFICOS
-   filter(Media>="7") %>% #ORGANIZANDO AS MEDIAS MAIORES OU IGUAIS A 7 EM ORDEM CRESCENTE
+    # AGRUPANDO DADOS ESPECIFICOS
+   group_by(Media,Nota1,Nota2, Aluno) %>% 
+   # ORGANIZANDO AS MEDIAS MAIORES OU IGUAIS A 7 EM ORDEM CRESCENTE
+    filter(Media>="7") %>% 
   summarise()
 ```
+Você pode utilizar o pacote Dplyr todas as vezes que desejar trabalhar com a organização dos dados de uma tabela. O Dplyr possibilita um trabalho de forma mais intuitiva para que haja uma melhor compreensão dos dados contidos em uma tabela.
