@@ -286,23 +286,38 @@ Exemplo utilizando planilha do Excel
 ## Indicando o arquivo xlsx que será carregado na variável dados
 
  dados = read.xlsx(file='Turma.xlsx', sheetIndex = 1)
- dados %>%
-    # AGRUPANDO DADOS ESPECIFICOS
-   group_by(Media,Nota1,Nota2, Aluno) %>% 
-   # ORGANIZANDO AS MEDIAS MAIORES OU IGUAIS A 7 EM ORDEM CRESCENTE
-    filter(Media>="7") %>% 
-  summarise()
+ 
+ #Exibindo Dados da Tabela
+ dados%>%
+    filter(!is.null(Aluno))
 ```
 
-    ## `summarise()` has grouped output by 'Media', 'Nota1', 'Nota2'. You can override using the `.groups` argument.
+    ##           Aluno Nota1 Nota2 Presencas Aulas
+    ## 1    Joao Pedro     7     8       180   200
+    ## 2   Maros Paulo     8    10       200   200
+    ## 3  Rebeca Silva     4     6       150   200
+    ## 4 Lucas Barbosa     3     9       178   200
+    ## 5    Maria Rita    10     4       199   200
+
+``` r
+ dados %>%
+    
+    # AGRUPANDO DADOS ESPECIFICOS
+   group_by(Nota1,Nota2, Aluno) %>% 
+   # ORGANIZANDO AS MEDIAS MAIORES OU IGUAIS A 7 EM ORDEM CRESCENTE
+    summarise(Media=sum(Nota1,Nota2)/2)%>%
+    filter(Media>="7")
+```
+
+    ## `summarise()` has grouped output by 'Nota1', 'Nota2'. You can override using the `.groups` argument.
 
     ## # A tibble: 3 x 4
-    ## # Groups:   Media, Nota1, Nota2 [3]
-    ##   Media Nota1 Nota2 Aluno      
-    ##   <dbl> <dbl> <dbl> <chr>      
-    ## 1   7      10     4 Maria Rita 
-    ## 2   7.5     7     8 Joao Pedro 
-    ## 3   9       8    10 Maros Paulo
+    ## # Groups:   Nota1, Nota2 [3]
+    ##   Nota1 Nota2 Aluno       Media
+    ##   <dbl> <dbl> <chr>       <dbl>
+    ## 1     7     8 Joao Pedro    7.5
+    ## 2     8    10 Maros Paulo   9  
+    ## 3    10     4 Maria Rita    7
 
 Você pode utilizar o pacote Dplyr todas as vezes que desejar trabalhar
 com a organização dos dados de uma tabela. O Dplyr possibilita um

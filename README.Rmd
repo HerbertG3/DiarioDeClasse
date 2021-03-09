@@ -185,11 +185,19 @@ install.packages("dplyr", repos = "http://cran.r-project.org")
 ## Indicando o arquivo xlsx que será carregado na variável dados
 
  dados = read.xlsx(file='Turma.xlsx', sheetIndex = 1)
+ 
+ #Exibindo Dados da Tabela
+ dados%>%
+    filter(!is.null(Aluno))
+ 
  dados %>%
+    
     # AGRUPANDO DADOS ESPECIFICOS
-   group_by(Media,Nota1,Nota2, Aluno) %>% 
+   group_by(Nota1,Nota2, Aluno) %>% 
    # ORGANIZANDO AS MEDIAS MAIORES OU IGUAIS A 7 EM ORDEM CRESCENTE
-    filter(Media>="7") %>% 
-  summarise()
+    summarise(Media=sum(Nota1,Nota2)/2)%>%
+    filter(Media>="7")
+ 
+ 
 ```
 Você pode utilizar o pacote Dplyr todas as vezes que desejar trabalhar com a organização dos dados de uma tabela. O Dplyr possibilita um trabalho de forma mais intuitiva para que haja uma melhor compreensão dos dados contidos em uma tabela.
